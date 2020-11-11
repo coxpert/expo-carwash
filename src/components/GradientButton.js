@@ -2,6 +2,7 @@ import React from 'react'
 import {LinearGradient} from "expo-linear-gradient";
 import {Text, TouchableOpacity} from "react-native";
 import {colorGradientEnd, colorGradientStart} from "../constants";
+import {LoadingIcon} from "./LoadingIcon";
 
 export const GradientButton = (props) => {
 
@@ -13,10 +14,11 @@ export const GradientButton = (props) => {
         style,
         disabled,
         onPress,
+        loading
     } = props
 
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={onPress} style={ style }>
             <LinearGradient
                 colors={[colorGradientStart, colorGradientEnd]}
                 start = {start}
@@ -29,10 +31,13 @@ export const GradientButton = (props) => {
                     justifyContent:'center',
                     alignItems:'center',
                     height: 60,
-                    ...style
                 }}
             >
-                <Text style={{color:'white', fontSize: 24}}>{title}</Text>
+                {
+                    loading?
+                        <LoadingIcon/>:
+                        <Text style={{color:'white', fontSize: 24}}>{title}</Text>
+                }
             </LinearGradient>
         </TouchableOpacity>
     )
