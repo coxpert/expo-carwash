@@ -1,11 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet, ImageBackground, Image} from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    ImageBackground,
+    Image,
+    TextInput
+} from 'react-native';
 import {imgBackground, imgLogoText, imgMenu1, imgMenu2, imgMenu3} from "../constants";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import { LinearGradient } from 'expo-linear-gradient';
-
-const colorGradientStart = '#21FF99';
-const colorGradientEnd = '#008CFF';
+import {GradientPanel} from "../components";
 
 const HomeScreen = ({navigation}) =>{
     return (
@@ -33,12 +37,12 @@ const HomeScreen = ({navigation}) =>{
             </View>
 
             <View style={styles.formContainer}>
-                <LinearGradient
-                    colors={['rgba(0,0,0,0.8)', 'transparent']}
-                    style={{}}
-                >
+                <GradientPanel style = {styles.phoneNumberGroup}>
+                    <View style={styles.countryCode}>
 
-                </LinearGradient>
+                    </View>
+                    <TextInput style={styles.phoneNumber}/>
+                </GradientPanel>
             </View>
         </ImageBackground>
     )
@@ -94,6 +98,23 @@ const styles = StyleSheet.create({
         position:'absolute',
         bottom:0
     },
+    phoneNumberGroup:{
+        height: 70,
+        flexDirection:'row',
+        justifyContent: 'space-around',
+    },
+    countryCode:{
+        width: '33%',
+        height:'100%',
+        backgroundColor: 'white',
+        borderTopRightRadius: 6,
+        borderBottomLeftRadius: 6,
+    },
+    phoneNumber:{
+        width:'65%',
+        backgroundColor:'white',
+        height:'100%',
+    }
 })
 
 export  default  HomeScreen;
