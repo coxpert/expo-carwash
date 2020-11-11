@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
     View,
     Text,
@@ -6,7 +6,8 @@ import {
     Image,
     TextInput,
     Animated,
-    Platform
+    Platform,
+    InteractionManager
 } from 'react-native';
 
 import { imgMenu1, imgMenu2, imgMenu3} from "../../constants";
@@ -16,13 +17,23 @@ import Feather from 'react-native-vector-icons/Feather';
 import {useFirestore} from "react-redux-firebase";
 import AuthLayout from "./AuthLayout";
 
-const PhoneNumberScreen = () =>{
+const PhoneNumberScreen = ({navigation}) =>{
 
     const [formContainerHeight] = useState( new Animated.Value(hp('26%')))
     const [showButton, setShowButton] = useState(false);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [countryCode, setCountryCode] = useState('+971');
+    const [loading, setLoading] = useState(false);
     const firestore = useFirestore();
+    const phoneNumberInput = useRef(null);
+
+    useEffect(()=>{
+        if(showButton && phoneNumberInput){
+            InteractionManager.runAfterInteractions(() => {
+                phoneNumberInput.current.focus()
+            });
+        }
+    })
 
     const _handleChange = (text) => {
         setPhoneNumber(text.replace(/ /g,'').replace(/(\d{2})(\d{3})(\d{4})/,"$1 $2 $3") )
@@ -38,11 +49,23 @@ const PhoneNumberScreen = () =>{
     }
 
     const _handleSubmit = () =>{
+        setLoading(true);
         firestore.collection('users')
             .where('phone_number','==', countryCode + phoneNumber)
             .get()
             .then(res=>{
-                console.log(res)
+                setLoading(false);
+                if(res.size === 0){
+                    navigation.navigate('Verify')
+                }else {
+                    res.forEach(user=>{
+                        if(user && user.data()){
+                            navigation.navigate('Password',{user: user})
+                        }else {
+                            navigation.navigate('Verify')
+                        }
+                    })
+                }
             })
     }
 
@@ -76,9 +99,10 @@ const PhoneNumberScreen = () =>{
                         value={phoneNumber}
                         onChangeText={_handleChange}
                         onFocus={_animateFormContainer}
+                        ref = {phoneNumberInput}
                     />
                 </GradientPanel>
-                {showButton  && <GradientButton loading onPress={_handleSubmit} style={styles.continueButton} disabled = { phoneNumber.toString().length < 9} />}
+                {showButton  && <GradientButton loading = {loading} onPress={_handleSubmit} style={styles.continueButton} disabled = { phoneNumber.toString().length < 9} />}
             </Animated.View>
         </AuthLayout>
     )

@@ -18,7 +18,7 @@ export const GradientButton = (props) => {
     } = props
 
     return (
-        <TouchableOpacity onPress={onPress} style={ style }>
+        <TouchableOpacity onPress={disabled?()=>{}: onPress} style={ style }>
             <LinearGradient
                 colors={[colorGradientStart, colorGradientEnd]}
                 start = {start}
@@ -26,7 +26,7 @@ export const GradientButton = (props) => {
                 style={{
                     width:'100%',
                     borderRadius: borderRadius,
-                    opacity: disabled?0.3:1,
+                    opacity: disabled?0.5:1,
                     backgroundColor:'white',
                     justifyContent:'center',
                     alignItems:'center',
