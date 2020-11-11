@@ -50,23 +50,25 @@ const PhoneNumberScreen = ({navigation}) =>{
 
     const _handleSubmit = () =>{
         setLoading(true);
-        firestore.collection('users')
-            .where('phone_number','==', countryCode + phoneNumber)
-            .get()
-            .then(res=>{
-                setLoading(false);
-                if(res.size === 0){
-                    navigation.navigate('Verify')
-                }else {
-                    res.forEach(user=>{
-                        if(user && user.data()){
-                            navigation.navigate('Password',{user: user})
-                        }else {
-                            navigation.navigate('Verify')
-                        }
-                    })
-                }
-            })
+
+        navigation.navigate('Home')
+        // firestore.collection('users')
+        //     .where('phone_number','==', countryCode + phoneNumber)
+        //     .get()
+        //     .then(res=>{
+        //         setLoading(false);
+        //         if(res.size === 0){
+        //             navigation.navigate('Verify')
+        //         }else {
+        //             res.forEach(user=>{
+        //                 if(user && user.data()){
+        //                     navigation.navigate('Password',{user: user})
+        //                 }else {
+        //                     navigation.navigate('Verify')
+        //                 }
+        //             })
+        //         }
+        //     })
     }
 
     return (
