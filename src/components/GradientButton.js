@@ -1,6 +1,6 @@
 import React from 'react'
 import {LinearGradient} from "expo-linear-gradient";
-import {Text} from "react-native";
+import {Text, TouchableOpacity} from "react-native";
 import {colorGradientEnd, colorGradientStart} from "../constants";
 
 export const GradientButton = (props) => {
@@ -11,27 +11,30 @@ export const GradientButton = (props) => {
         borderRadius,
         title,
         style,
-        disabled
+        disabled,
+        onPress,
     } = props
 
     return (
-        <LinearGradient
-            colors={[colorGradientStart, colorGradientEnd]}
-            start = {start}
-            end = {end}
-            style={{
-                width:'100%',
-                borderRadius: borderRadius,
-                opacity: disabled?0.3:1,
-                backgroundColor:'white',
-                justifyContent:'center',
-                alignItems:'center',
-                height: 60,
-                ...style
-            }}
-        >
-            <Text style={{color:'white', fontSize: 24}}>{title}</Text>
-        </LinearGradient>
+        <TouchableOpacity onPress={onPress}>
+            <LinearGradient
+                colors={[colorGradientStart, colorGradientEnd]}
+                start = {start}
+                end = {end}
+                style={{
+                    width:'100%',
+                    borderRadius: borderRadius,
+                    opacity: disabled?0.3:1,
+                    backgroundColor:'white',
+                    justifyContent:'center',
+                    alignItems:'center',
+                    height: 60,
+                    ...style
+                }}
+            >
+                <Text style={{color:'white', fontSize: 24}}>{title}</Text>
+            </LinearGradient>
+        </TouchableOpacity>
     )
 }
 GradientButton.defaultProps = {

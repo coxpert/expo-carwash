@@ -20,7 +20,7 @@ const HomeScreen = () =>{
     const [phoneNumber, setPhoneNumber] = useState('');
 
     const _handleChange = (text) => {
-        setPhoneNumber(text)
+        setPhoneNumber(text.replace(/ /g,'').replace(/(\d{2})(\d{3})(\d{4})/,"$1 $2 $3") )
     }
 
     const _animateFormContainer = () => {
@@ -67,11 +67,11 @@ const HomeScreen = () =>{
                         keyboardType ="numeric"
                         placeholder = "Phone Number"
                         value={phoneNumber}
-                        onChange={_handleChange}
+                        onChangeText={_handleChange}
                         onFocus={_animateFormContainer}
                     />
                 </GradientPanel>
-                {showButton  && <GradientButton style={styles.continueButton} disabled/>}
+                {showButton  && <GradientButton style={styles.continueButton} disabled = { phoneNumber.toString().length < 9} />}
             </Animated.View>
         </ImageBackground>
     )
