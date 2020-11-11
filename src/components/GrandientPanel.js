@@ -33,7 +33,7 @@ export const GradientPanel = (props) => {
 GradientPanel.defaultProps = {
     start:[0, 1],
     end:[1, 0],
-    styles:{},
+    style:{},
     borderWidth: 2,
     borderRadius: 8,
 }

@@ -1,17 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     View,
     Text,
     StyleSheet,
     ImageBackground,
     Image,
-    TextInput
+    TextInput,
+    Animated,
 } from 'react-native';
 import {imgBackground, imgLogoText, imgMenu1, imgMenu2, imgMenu3} from "../constants";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import {GradientPanel} from "../components";
+import {GradientButton, GradientPanel} from "../components";
+import Feather from 'react-native-vector-icons/Feather';
 
-const HomeScreen = ({navigation}) =>{
+const HomeScreen = () =>{
+
+    const [formContainerHeight] = useState( new Animated.Value(hp('26%')))
+    const [showButton, setShowButton] = useState(false);
+    const [phoneNumber, setPhoneNumber] = useState('');
+
+    const _handleChange = (text) => {
+        setPhoneNumber(text)
+    }
+
+    const _animateFormContainer = () => {
+        Animated.timing(formContainerHeight, {
+            toValue: hp('73%'),
+            duration: 600,
+        }).start();
+        setShowButton(true);
+    }
+
     return (
         <ImageBackground
             source={imgBackground}
@@ -36,14 +55,24 @@ const HomeScreen = ({navigation}) =>{
                 </View>
             </View>
 
-            <View style={styles.formContainer}>
-                <GradientPanel style = {styles.phoneNumberGroup}>
-                    <View style={styles.countryCode}>
-
+            <Animated.View style={{height: formContainerHeight,...styles.formContainer}}>
+                { showButton  && <Text style={styles.topText}>Enter mobile number</Text>}
+                <GradientPanel style = { styles.phoneNumberGroup} >
+                    <View style={styles.countryCode} >
+                        <Feather name="chevron-down" size={22} color="#555555"/>
+                        <Text style={styles.countryCodeText}>+971</Text>
                     </View>
-                    <TextInput style={styles.phoneNumber}/>
+                    <TextInput
+                        style={styles.phoneNumber}
+                        keyboardType ="numeric"
+                        placeholder = "Phone Number"
+                        value={phoneNumber}
+                        onChange={_handleChange}
+                        onFocus={_animateFormContainer}
+                    />
                 </GradientPanel>
-            </View>
+                {showButton  && <GradientButton style={styles.continueButton} disabled/>}
+            </Animated.View>
         </ImageBackground>
     )
 }
@@ -88,32 +117,51 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: wp('4.7%')
     },
+    topText:{
+        color:'#555555',
+        marginBottom: 50,
+        fontSize: 18,
+    },
     formContainer:{
         width: wp('100%'),
         borderTopLeftRadius: wp('8%'),
         borderTopRightRadius: wp('8%'),
         backgroundColor:'white',
-        height: hp('26%'),
-        padding: wp('10%'),
+        padding: wp('6%'),
         position:'absolute',
         bottom:0
     },
     phoneNumberGroup:{
-        height: 70,
+        marginTop: 30,
+        height: 60,
         flexDirection:'row',
         justifyContent: 'space-around',
     },
     countryCode:{
-        width: '33%',
+        width: '30.6%',
         height:'100%',
         backgroundColor: 'white',
-        borderTopRightRadius: 6,
+        borderTopLeftRadius: 6,
         borderBottomLeftRadius: 6,
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    countryCodeText:{
+        color: '#555555',
+        fontSize: 18,
     },
     phoneNumber:{
-        width:'65%',
+        width:'68%',
         backgroundColor:'white',
         height:'100%',
+        borderTopRightRadius: 6,
+        borderBottomRightRadius: 6,
+        padding: 10,
+        fontSize: 18,
+    },
+    continueButton:{
+        marginTop: 60,
     }
 })
 

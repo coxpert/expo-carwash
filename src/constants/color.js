@@ -1,2 +1,2 @@
-export const colorGradientStart = '#69e3bc';
+export const colorGradientStart = '#38cb9a';
 export const colorGradientEnd = '#008CFF';
