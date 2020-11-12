@@ -29,6 +29,7 @@
     "react-native-confirmation-code-field": "^6.5.1",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-maps": "^0.27.1",
+    "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-responsive-screen": "^1.4.1",
     "react-native-screens": "~2.10.1",
     "react-native-vector-icons": "^7.1.0",

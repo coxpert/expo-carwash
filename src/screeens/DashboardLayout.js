@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import {
     View,
     StyleSheet,
@@ -9,9 +9,21 @@ import MapView from 'react-native-maps';
 import {imgTopBar} from "../constants";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Feather from 'react-native-vector-icons/Feather';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import RBSheet from "react-native-raw-bottom-sheet";
+import {Text} from "react-native-web";
+
+const MenuItem = ({icon, title, onPress}) => {
+    return (
+        <TouchableOpacity>
+
+        </TouchableOpacity>
+    )
+}
 
 const DashboardLayout = (props) => {
 
+    const menuRef = useRef(null);
     const {
         children
     } = props;
@@ -20,12 +32,28 @@ const DashboardLayout = (props) => {
         <View style={styles.root}>
             <MapView style={styles.mapStyle} />
             <Image source={imgTopBar} style={styles.topBarImage}/>
-            <TouchableOpacity style={styles.menuButton}>
+            <TouchableOpacity style={styles.menuButton} onPress={() => menuRef.open()}>
                 <Feather name="menu" size={24} color='#555555'/>
             </TouchableOpacity>
             <View style={styles.content}  pointerEvents="box-none">
                 {children}
             </View>
+            <RBSheet
+                ref={menuRef}
+                height={hp('100%') - 90}
+                openDuration={250}
+                customStyles={{
+                    container: {
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }
+                }}
+            >
+                <View>
+                    <Text>Setting</Text>
+                    <MaterialIcons name="close" size={20} color="#555555"/>
+                </View>
+            </RBSheet>
         </View>
     )
 }
