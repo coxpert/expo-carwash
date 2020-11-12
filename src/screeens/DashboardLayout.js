@@ -7,17 +7,31 @@ import {
     Text
 } from "react-native";
 import MapView from 'react-native-maps';
-import {imgTopBar} from "../constants";
+import {
+    iconChart,
+    iconDate,
+    iconLeftArrow,
+    iconManageCard,
+    iconMarkFill,
+    iconMenuCar,
+    iconProfile,
+    imgTopBar
+} from "../constants";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import RBSheet from "react-native-raw-bottom-sheet";
+import {Paper} from "../components";
 
 const MenuItem = ({icon, title, onPress}) => {
     return (
-        <TouchableOpacity>
-
-        </TouchableOpacity>
+        <Paper onPress={onPress} style={{flexDirection: 'row', alignItems:'center', justifyContent:'space-between', paddingVertical: 15,}}>
+            <View style={{alignItems:'center', flexDirection: 'row'}}>
+                <Image source={icon} style={{marginRight: 10,}}/>
+                <Text>{title}</Text>
+            </View>
+            <Image source={iconLeftArrow}/>
+        </Paper>
     )
 }
 
@@ -48,14 +62,26 @@ const DashboardLayout = (props) => {
                         borderTopRightRadius: 15,
                         borderTopLeftRadius: 15,
                         backgroundColor:'white',
-                        padding: 20,
                     }
                 }}
             >
                 <View style={styles.menuTop}>
                     <Text style={{color:'#555555', fontSize: 20}}>Setting</Text>
-                    <MaterialIcons name="close" size={20} color="#555555"/>
+                    <TouchableOpacity onPress={() => menuRef.current.close()}>
+                        <MaterialIcons name="close" size={20} color="#555555"/>
+                    </TouchableOpacity>
                 </View>
+                <MenuItem icon={iconProfile} title="Profile" onPress={()=>{alert('profile')}} />
+                <MenuItem icon={iconMenuCar} title="My Vehicles" onPress={()=>{alert('profile')}} />
+                <MenuItem icon={iconDate} title="Last Orders" onPress={()=>{alert('profile')}} />
+                <MenuItem icon={iconMarkFill} title="My Locations" onPress={()=>{alert('profile')}} />
+                <Text style={{marginTop: 10, width:'90%'}}>Payment</Text>
+                <MenuItem icon={iconManageCard} title="Manage Payments" onPress={()=>{alert('profile')}} />
+                <Text style={{marginTop: 10, width:'90%'}}>Support</Text>
+                <MenuItem icon={iconChart} title="Chat With Us" onPress={()=>{alert('profile')}} />
+                <TouchableOpacity style={styles.logOutContainer} onPress={()=>{}}>
+                    <Text style={styles.logoutText}>Logout</Text>
+                </TouchableOpacity>
             </RBSheet>
         </View>
     )
@@ -100,7 +126,16 @@ const styles = StyleSheet.create({
     menuTop:{
         width:'100%',
         flexDirection:'row',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        margin: wp('5%'),
+        paddingHorizontal: wp('5%')
+    },
+    logOutContainer:{
+      marginTop: 20,
+    },
+    logoutText:{
+        color:'#ED7777',
+        fontSize: 20,
     }
 })
 

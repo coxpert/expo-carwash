@@ -12,7 +12,9 @@ export const GradientBorderView = (props) => {
         borderWidth,
         borderRadius,
         children,
-        style
+        style,
+        containerStyle,
+        fill
     } = props
 
     return (
@@ -24,16 +26,21 @@ export const GradientBorderView = (props) => {
                 width:'100%',
                 borderRadius: borderRadius,
                 padding: borderWidth,
+                ...containerStyle
             }}
         >
-            <View style={{
-                backgroundColor:'white',
-                borderRadius:borderRadius - borderWidth,
-                width:'100%',
-                ...style
-            }}>
-                {children}
-            </View>
+            {
+                fill? children:
+                    <View style={{
+                        backgroundColor:'white',
+                        borderRadius:borderRadius - borderWidth,
+                        width:'100%',
+                        height:'100%',
+                        ...style
+                    }}>
+                        {children}
+                    </View>
+            }
         </LinearGradient>
     )
 }

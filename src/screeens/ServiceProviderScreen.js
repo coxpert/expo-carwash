@@ -1,6 +1,6 @@
 import React from 'react'
 import DashboardLayout from "./DashboardLayout";
-import {Paper} from "../components";
+import {GradientBorderView, GradientButton, Paper} from "../components";
 import {Text, Image, StyleSheet, FlatList, TouchableOpacity, View} from "react-native";
 import {BottomPanel} from "../components/BottmPanel";
 import {iconAdd, iconMark, iconOval} from "../constants";
@@ -44,16 +44,19 @@ const ServiceProviderScreen = () => {
     return (
         <DashboardLayout>
             <BottomPanel style={styles.panelBody}>
-                <FlatList
-                    horizontal={true}
-                    data={['Car wash service', 'Oil change', 'Car maintenance']}
-                    renderItem = {({item})=>(
-                        <TouchableOpacity>
-                            <Text>{item}</Text>
-                        </TouchableOpacity>
-                    )}
-                    keyExtractor={item => item}
-                />
+                <View style={{width:'100%', height: 32}}>
+                    <FlatList
+                        horizontal={true}
+                        data={['Car wash service', 'Oil change', 'Car maintenance']}
+                        renderItem = {({item})=>(
+                            <GradientBorderView fill containerStyle={{width:'auto', marginLeft: 10}} style={{paddingVertical: 4, paddingHorizontal: 15}}>
+                                <Text>{item}</Text>
+                            </GradientBorderView>
+                        )}
+                        keyExtractor={item => item}
+                    />
+                </View>
+
                 <FlatList
                     data={data}
                     renderItem = {_renderItem}

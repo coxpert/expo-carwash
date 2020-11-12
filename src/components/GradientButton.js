@@ -42,6 +42,7 @@ export const GradientButton = (props) => {
         </TouchableOpacity>
     )
 }
+
 GradientButton.defaultProps = {
     title:'Continue',
     borderRadius: 8,
