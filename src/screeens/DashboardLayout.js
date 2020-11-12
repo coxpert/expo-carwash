@@ -3,7 +3,8 @@ import {
     View,
     StyleSheet,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Text
 } from "react-native";
 import MapView from 'react-native-maps';
 import {imgTopBar} from "../constants";
@@ -11,7 +12,6 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import RBSheet from "react-native-raw-bottom-sheet";
-import {Text} from "react-native-web";
 
 const MenuItem = ({icon, title, onPress}) => {
     return (
@@ -32,7 +32,7 @@ const DashboardLayout = (props) => {
         <View style={styles.root}>
             <MapView style={styles.mapStyle} />
             <Image source={imgTopBar} style={styles.topBarImage}/>
-            <TouchableOpacity style={styles.menuButton} onPress={() => menuRef.open()}>
+            <TouchableOpacity style={styles.menuButton} onPress={() => menuRef.current.open()}>
                 <Feather name="menu" size={24} color='#555555'/>
             </TouchableOpacity>
             <View style={styles.content}  pointerEvents="box-none">
@@ -44,13 +44,16 @@ const DashboardLayout = (props) => {
                 openDuration={250}
                 customStyles={{
                     container: {
-                        justifyContent: "center",
-                        alignItems: "center"
+                        alignItems: "center",
+                        borderTopRightRadius: 15,
+                        borderTopLeftRadius: 15,
+                        backgroundColor:'white',
+                        padding: 20,
                     }
                 }}
             >
-                <View>
-                    <Text>Setting</Text>
+                <View style={styles.menuTop}>
+                    <Text style={{color:'#555555', fontSize: 20}}>Setting</Text>
                     <MaterialIcons name="close" size={20} color="#555555"/>
                 </View>
             </RBSheet>
@@ -93,6 +96,11 @@ const styles = StyleSheet.create({
         top: 53,
         left: 20,
         zIndex: 1000,
+    },
+    menuTop:{
+        width:'100%',
+        flexDirection:'row',
+        justifyContent:'space-between'
     }
 })
 
