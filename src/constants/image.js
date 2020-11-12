@@ -10,4 +10,6 @@ export const imgLogoText = require('../assets/images/logo-text.png')
 //icons
 
 export const iconCar = require('../assets/images/car.png')
+export const iconOval = require('../assets/images/oval.png')
 export const iconMark = require('../assets/images/mark.png')
+export const iconAdd = require('../assets/images/add.png')

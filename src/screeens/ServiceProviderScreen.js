@@ -21,44 +21,39 @@ const data = [
     }
 ]
 
-const HomeScreen = ({navigation}) => {
+const ServiceProviderScreen = () => {
 
 
     const _serviceItemPress = () => {
-        navigation.navigate('ServiceProvider')
+
     }
 
     const _renderItem = ({item}) => (
-            <TouchableOpacity onPress={_serviceItemPress} style={styles.serviceItem}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Image source={iconOval} style={styles.serviceItemImage}/>
-                    <View style={styles.serviceItemText}>
-                        <Text style={styles.textTitle}>{item.title}</Text>
-                        <Text style={styles.textDescription}>{item.description}</Text>
-                    </View>
+        <TouchableOpacity onPress={_serviceItemPress} style={styles.serviceItem}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Image source={iconOval} style={styles.serviceItemImage}/>
+                <View style={styles.serviceItemText}>
+                    <Text style={styles.textTitle}>{item.title}</Text>
+                    <Text style={styles.textDescription}>{item.description}</Text>
                 </View>
-                <MaterialIcons name="keyboard-arrow-right" size={32} color={mainColor} style={styles.arrowIcon} />
-            </TouchableOpacity>
-        )
+            </View>
+            <MaterialIcons name="keyboard-arrow-right" size={32} color={mainColor} style={styles.arrowIcon} />
+        </TouchableOpacity>
+    )
 
     return (
         <DashboardLayout>
-            <Paper style={styles.paperStyle}>
-                <Image source={iconMark}  style={styles.iconStyle}/>
-                <Text style={styles.textStyle}>Al Majaz 1 - Sharjah</Text>
-            </Paper>
-
-            <Paper style={styles.paperStyle}>
-                <Image source={iconMark}  style={styles.iconStyle}/>
-                <Text style={styles.textStyle}>Al Majaz 1 - Sharjah</Text>
-            </Paper>
-
-            <Paper onPress={()=>{alert('Test')}} style={styles.addVehicleStyle}>
-                <Image source={iconAdd}  style={styles.iconStyle}/>
-                <Text style={styles.textStyle}>Add Vehicle</Text>
-            </Paper>
-
-            <BottomPanel style={{paddingHorizontal: 20, paddingTop: 30}}>
+            <BottomPanel style={styles.panelBody}>
+                <FlatList
+                    horizontal={true}
+                    data={['Car wash service', 'Oil change', 'Car maintenance']}
+                    renderItem = {({item})=>(
+                        <TouchableOpacity>
+                            <Text>{item}</Text>
+                        </TouchableOpacity>
+                    )}
+                    keyExtractor={item => item}
+                />
                 <FlatList
                     data={data}
                     renderItem = {_renderItem}
@@ -70,18 +65,9 @@ const HomeScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-    addVehicleStyle:{
-      justifyContent:'center',
-        marginTop: 100,
-    },
-    paperStyle:{
-        marginTop: 100
-    },
-    iconStyle:{
-        marginRight: 10
-    },
-    textStyle:{
-
+    panelBody:{
+        paddingHorizontal: 20, paddingTop: 30,
+        height: hp('100%') - 90,
     },
     serviceItem:{
         width: wp('100%')-40,
@@ -110,4 +96,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default HomeScreen;
+export default ServiceProviderScreen;

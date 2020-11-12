@@ -23,7 +23,7 @@ const DashboardLayout = (props) => {
             <TouchableOpacity style={styles.menuButton}>
                 <Feather name="menu" size={24} color='#555555'/>
             </TouchableOpacity>
-            <View style={styles.content}  pointerEvents="none">
+            <View style={styles.content}  pointerEvents="box-none">
                 {children}
             </View>
         </View>
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
         position:'absolute',
         left: 0,
         top: 80,
+        zIndex: 1,
     },
     topBarImage:{
         position:'absolute',

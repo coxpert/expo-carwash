@@ -11,6 +11,7 @@ import VerifyScreen from "./screeens/AuthScreens/VerifyScreen";
 import HomeScreen from "./screeens/HomeScreen";
 
 import {useSelector} from "react-redux";
+import ServiceProviderScreen from "./screeens/ServiceProviderScreen";
 
 const Stack = createStackNavigator();
 
@@ -66,6 +67,15 @@ export  const AppNavigator = () =>{
                         header: props => null
                     }}
                 />
+
+                <Stack.Screen
+                    name="ServiceProvider"
+                    component={ServiceProviderScreen}
+                    options={{
+                        header: props => null
+                    }}
+                />
+
 
             </Stack.Navigator>
         </NavigationContainer>
