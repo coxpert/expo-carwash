@@ -41,7 +41,7 @@ export const ColorDialog = (props) => {
                 ref={dialogRef}
                 height={hp('45%')}
                 openDuration={300}
-                closeOnPressBack={false}
+                closeOnPressMask={false}
                 customStyles={{
                     container: {
                         alignItems: "center",

@@ -5,20 +5,18 @@ import {
     Image,
     TouchableOpacity,
     Text,
-    TextInput
+    TextInput, InteractionManager
 } from "react-native";
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Paper} from "../Paper";
-import {colorBorder, colorText, iconArrowLeft, iconArrowNext, iconCar, iconSearch} from "../../constants";
+import {colorBorder, colorText, iconArrowLeft, iconCar} from "../../constants";
 import RBSheet from "react-native-raw-bottom-sheet";
 import {GradientBorderView} from "../GradientBorderView";
-import {ColorPan} from "./ColorPan";
 import Feather from 'react-native-vector-icons/Feather';
 
 export const PlateNumberDialog = (props) => {
 
     const dialogRef = useRef(null);
+    const inputRef = useRef(null);
     const {
         open,
         setStep,
@@ -34,13 +32,21 @@ export const PlateNumberDialog = (props) => {
         }
     },[open])
 
+    useEffect(()=>{
+        if(inputRef){
+            InteractionManager.runAfterInteractions(() => {
+                inputRef.current.focus()
+            });
+        }
+    }, [])
+
 
     return(
         <>
             <RBSheet
                 ref={dialogRef}
                 openDuration={300}
-                closeOnPressBack={false}
+                closeOnPressMask={false}
                 customStyles={{
                     container: {
                         alignItems: "center",
@@ -56,7 +62,7 @@ export const PlateNumberDialog = (props) => {
                             <Image source={iconArrowLeft} />
                         </TouchableOpacity>
                     </View>
-                    <View style={{flex: 2}}>
+                    <View style={{flex: 2, alignItems:'center', justifyContent:'center'}}>
                         <GradientBorderView containerStyle={{width: 'auto', height:35}} style={styles.carInfo}>
                             <Image source={iconCar}/>
                             <Text style={{color:colorText,}}>{brand}</Text>
@@ -67,23 +73,24 @@ export const PlateNumberDialog = (props) => {
                 </View>
                 <View style={{width: '100%', alignItems:'center'}}><Text>Enter your plate number</Text></View>
 
-                <Paper style={{width: '70%', flexDirection:'row', height: 70, alignItems:'center'}}>
-                    <View style={{width: '35%', flexDirection:'row', alignItems:'center', padding: 12}}>
-                        <Text>Dubai</Text>
+                <Paper style={{width: '70%', flexDirection:'row', height: 70, alignItems:'center', marginTop: 20,}}>
+                    <View style={{width: '35%', flexDirection:'row', alignItems:'center'}}>
+                        <Text style={{fontSize: 18, marginRight: 10, color: colorText}}>Dubai</Text>
                         <Feather name="chevron-down" size={18} color="#555555"/>
                     </View>
                     <View style={{width: '30%'}}>
                         <TextInput
-                            style={styles.textInput}
+                            style={{...styles.textInput, marginHorizontal: 10,}}
+                            ref = {inputRef}
                         />
                     </View>
                     <View style={{width: '35%'}}>
                         <TextInput
                             style={styles.textInput}
+                            placeholder="NUMBER"
                         />
                     </View>
                 </Paper>
-
             </RBSheet>
         </>
     )
@@ -115,6 +122,6 @@ const styles = StyleSheet.create({
     textInput:{
       borderBottomWidth: 1,
       borderBottomColor: colorBorder,
-        backgroundColor:'red'
+        paddingLeft: 10,
     },
 })

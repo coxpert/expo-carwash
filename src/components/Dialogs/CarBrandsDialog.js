@@ -59,7 +59,7 @@ export const CarBrandsDialog = (props) => {
                 ref={dialogRef}
                 height={hp('100%') - 90}
                 openDuration={300}
-                closeOnPressBack={false}
+                closeOnPressMask={false}
                 customStyles={{
                     container: {
                         alignItems: "center",
