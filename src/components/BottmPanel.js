@@ -10,12 +10,9 @@ export const BottomPanel = (props) => {
 
     return (
         <>
-            {
-                hidden? null:
-                <View style={{...styles.root, ...style,}}>
-                    {children}
-                </View>
-            }
+            <View style={{...styles.root, ...style, display: hidden?'none':'block'}}>
+                {children}
+            </View>
         </>
     )
 }
@@ -41,7 +38,7 @@ const styles = StyleSheet.create({
             height: 2,
         },
         shadowOpacity: 0.58,
-        shadowRadius: 16.00,
+        shadowRadius: 2,
 
         elevation: 24,
     }

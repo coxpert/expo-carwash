@@ -11,7 +11,7 @@ import {
 } from "../components";
 import {Text, Image, StyleSheet, FlatList, View} from "react-native";
 import {BottomPanel} from "../components/BottmPanel";
-import {iconCar, iconOval, imgDate} from "../constants";
+import {colorTextBlue, iconCar, iconOval, imgDate} from "../constants";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 //Dialogs
@@ -23,7 +23,7 @@ const serviceList = ['Car wash service', 'Oil change', 'Car maintenance']
 
 const ServiceProviderScreen = () => {
 
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(2);
     const [serviceProvider, setServiceProvider] = useState('');
     const [serviceCategory, setServiceCategory] = useState(serviceList[0]);
     const [vehicle, setVehicle] = useState('car');
@@ -61,7 +61,7 @@ const ServiceProviderScreen = () => {
                     colors={['#21FF9933', '#008CFF33']}
                     style={{width:'85%', height: 34, justifyContent: 'center', alignItems:'center'}}
                 >
-                    <Text>2020/11/09</Text>
+                    <Text style={{color: colorTextBlue}}>2020/11/09</Text>
                 </GradientPanel>
                 <Image source={imgDate} style={{height: 34, resizeMode: 'contain'}}/>
             </View>
@@ -70,7 +70,7 @@ const ServiceProviderScreen = () => {
 
     return (
         <DashboardLayout>
-            <BottomPanel style={styles.panelBody}  hidden = { step > 0 }>
+            <BottomPanel style={styles.panelBody}  hidden={step > 0}>
                 <View style={styles.serviceCategoryList}>
                     <FlatList
                         horizontal={true}
@@ -92,7 +92,7 @@ const ServiceProviderScreen = () => {
                     <FlatList
                         data={serviceProviders}
                         renderItem = {_renderItem}
-                        keyExtractor={item => item.id}
+                        keyExtractor={item => item.id.toString()}
                         ListEmptyComponent={()=>(
                             <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
                                 <LoadingIcon/>
@@ -102,12 +102,12 @@ const ServiceProviderScreen = () => {
                 </View>
             </BottomPanel>
 
-            <CarBrandsDialog setBrand = {setBrand} setStep = {setStep} setVehicle={setVehicle} vehicle={vehicle} open = { step === 1 } />
-            <CardModelDialog setModelNumber = {setModelNumber} brand = {brand} setStep = {setStep} open = { step === 2 } />
-            <ColorDialog setColor = {setColor} setStep = {setStep} brand={brand} modelNumber={modelNumber} open = { step === 3 } />
-            <PlateNumberDialog brand={brand} modelNumber={modelNumber} setStep = {setStep} open = { step === 4 } />
-            <TimingDialog setBrand = {setPlateNumber} setStep = {setStep} open = { step === 5 } />
-            <CheckoutDialog setStep = {setStep} open = { step === 6 } />
+            {step === 1 && <CarBrandsDialog setBrand={setBrand} setStep={setStep} setVehicle={setVehicle} vehicle={vehicle}/>}
+            {step === 2 && <CardModelDialog setModelNumber={setModelNumber} brand={brand} setStep={setStep}/>}
+            {step === 3 && <ColorDialog setColor={setColor} setStep={setStep} brand={brand} modelNumber={modelNumber}/>}
+            {/*<PlateNumberDialog brand={brand} modelNumber={modelNumber} setStep = {setStep} open = { step === 4 } />*/}
+            {/*<TimingDialog setBrand = {setPlateNumber} setStep = {setStep} open = { step === 5 } />*/}
+            {/*<CheckoutDialog setStep = {setStep} open = { step === 6 } />*/}
 
         </DashboardLayout>
     )
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     textTitle:{
         fontSize: 16,
         color:'#555555',
-        fontWeight:'100',
+        fontWeight:'400',
     },
     textDescription:{
         fontSize: 14,

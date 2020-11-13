@@ -59,7 +59,7 @@ const VerifyScreen = ({navigation}) =>{
                                 key={index}
                                 style={[styles.cell, isFocused && styles.focusCell]}
                                 onLayout={getCellOnLayoutHandler(index)}>
-                                <Text>{symbol || (isFocused ? <Cursor /> : null)}</Text>
+                                <Text style={{textAlign: 'center'}}>{symbol || (isFocused ? <Cursor /> : null)}</Text>
                             </View>
                         )}
                     />
@@ -107,6 +107,8 @@ const styles = StyleSheet.create({
         marginRight: 5,
         textAlign: 'center',
         color:'#555555',
+        justifyContent: 'center',
+        alignItems:'center'
     },
     focusCell: {
         borderColor: '#000',

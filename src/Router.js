@@ -22,7 +22,7 @@ export  const AppNavigator = () =>{
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName={ profile.isEmpty?"PhoneNumber":"Home" }
+                initialRouteName={ profile.isEmpty?"Home":"Home" }
                 screenOptions={{headerTitleAlign: 'center', animationEnabled: true}}
             >
 

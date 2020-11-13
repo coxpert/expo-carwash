@@ -20,7 +20,6 @@ import {useSelector} from "react-redux";
 export const CarBrandsDialog = (props) => {
 
     const {
-        open,
         setStep,
         setVehicle,
         setBrand,
@@ -32,12 +31,8 @@ export const CarBrandsDialog = (props) => {
     const [searchText, setSearchText] = useState('');
 
     useEffect(()=>{
-        if(open){
-            dialogRef.current.open();
-        }else {
-            dialogRef.current.close()
-        }
-    },[open])
+        dialogRef.current.open();
+    },[])
 
     const _brandItem = ({item}) => {
         return (
@@ -82,16 +77,16 @@ export const CarBrandsDialog = (props) => {
                                     <Image source={iconCar} style={{marginRight: 10}}/>
                                     <Text>Car</Text>
                                 </GradientBorderView>
-                                <Paper style={styles.vehicleKindItem} onPress={()=>{setVehicle('scooter')}}>
+                                <Paper style={{...styles.vehicleKindItem, height: 38,}} onPress={()=>{setVehicle('scooter')}}>
                                     <Image source={iconScooter} style={{marginRight: 10}}/>
                                     <Text>Scooter</Text>
                                 </Paper>
                             </>
                         ):(
                             <>
-                                <Paper style={{...styles.vehicleKindItem,...{marginRight: 10}}} onPress={()=>{setVehicle('car')}}>
+                                <Paper style={{...styles.vehicleKindItem,...{marginRight: 10, height: 38}}} onPress={()=>{setVehicle('car')}}>
                                     <Image source={iconCar} style={{marginRight: 10}}/>
-                                    <Text>Car</Text>
+                                    <Text > Car </Text>
                                 </Paper>
                                 <GradientBorderView containerStyle={{width: 94, height: 40,}} style={{...styles.vehicleKindItem,}}>
                                     <Image source={iconScooter} style={{marginRight: 10}}/>

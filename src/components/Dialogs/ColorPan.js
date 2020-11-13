@@ -21,10 +21,10 @@ export const ColorPan = ({colorName, setColor, openColorPicker, setStep}) => {
                                 margin:wp('1%'),
                                 backgroundColor: colorName,
                                 borderRadius: wp('4%'),
-                                shadowColor: colorName,
-                                shadowOffset: { width: -10, height: -10 },
+                                shadowColor: '#000',
+                                shadowOffset: { width: 0, height: 0 },
                                 shadowOpacity: 0.5,
-                                shadowRadius: 5,
+                                shadowRadius: 2,
                                 opacity: 0.7,
                                 elevation: 5
                             }}

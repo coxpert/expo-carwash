@@ -66,12 +66,14 @@ const HomeScreen = ({navigation}) => {
                 <Text style={styles.textStyle}>Add Vehicle</Text>
             </Paper>
 
-            <BottomPanel style={{paddingHorizontal: 20, paddingTop: 30, paddingBottom: 20}}>
-                <FlatList
-                    data={data}
-                    renderItem = {_renderItem}
-                    keyExtractor={item => item.id}
-                />
+            <BottomPanel style={{paddingHorizontal: 20, paddingTop: 30}}>
+                <View style={{height: hp('27%')}}>
+                    <FlatList
+                        data={data}
+                        renderItem = {_renderItem}
+                        keyExtractor={item => item.id.toString()}
+                    />
+                </View>
             </BottomPanel>
         </DashboardLayout>
     )

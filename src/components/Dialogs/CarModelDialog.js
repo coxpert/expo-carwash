@@ -21,19 +21,14 @@ export const CardModelDialog = (props) => {
     const [searchText, setSearchText] = useState('');
     const carModelNumbers = useSelector(state=>state.app.carModelNumbers || [])
     const {
-        open,
         setStep,
         brand,
         setModelNumber
     } = props;
 
     useEffect(()=>{
-        if(open){
-            dialogRef.current.open();
-        }else {
-            dialogRef.current.close()
-        }
-    },[open])
+        dialogRef.current.open();
+    },[])
 
     const _modelNumberItem = ({item}) => {
         return (

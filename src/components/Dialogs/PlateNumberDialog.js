@@ -38,7 +38,7 @@ export const PlateNumberDialog = (props) => {
     useEffect(()=>{
         if(inputRef){
             InteractionManager.runAfterInteractions(() => {
-                inputRef.current.focus()
+                // inputRef.current.focus()
             });
         }
     }, [])
@@ -87,8 +87,8 @@ export const PlateNumberDialog = (props) => {
                     </View>
                     <View style={{width: '30%'}}>
                         <TextInput
-                            style={{...styles.textInput, marginHorizontal: 10,}}
                             ref = {inputRef}
+                            style={{...styles.textInput, marginHorizontal: 10,}}
                         />
                     </View>
                     <View style={{width: '35%'}}>

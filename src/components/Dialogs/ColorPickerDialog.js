@@ -49,7 +49,7 @@ export const ColorPickerDialog = (props) => {
                         <MaterialIcons name="close" size={20} color="#555555"/>
                     </TouchableOpacity>
                 </View>
-                <View style={{flex: 1, width:'90%', paddingBottom: 30}}>
+                <View style={{flex: 1, width:'90%', paddingBottom: 60}}>
                     <ColorPicker
                         oldColor='purple'
                         color={color}

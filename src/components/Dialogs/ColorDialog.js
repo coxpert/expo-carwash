@@ -17,7 +17,6 @@ export const ColorDialog = (props) => {
 
     const dialogRef = useRef(null);
     const {
-        open,
         setStep,
         brand,
         modelNumber,
@@ -27,12 +26,8 @@ export const ColorDialog = (props) => {
     const [openColorPicker, setOpenColorPicker] = useState(false);
 
     useEffect(()=>{
-        if(open){
-            dialogRef.current.open();
-        }else {
-            dialogRef.current.close()
-        }
-    },[open])
+        dialogRef.current.open();
+    },[])
 
 
     return(
