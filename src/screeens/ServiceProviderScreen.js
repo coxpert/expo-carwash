@@ -23,7 +23,7 @@ const serviceList = ['Car wash service', 'Oil change', 'Car maintenance']
 
 const ServiceProviderScreen = () => {
 
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(0);
     const [serviceProvider, setServiceProvider] = useState('');
     const [serviceCategory, setServiceCategory] = useState(serviceList[0]);
     const [vehicle, setVehicle] = useState('car');
@@ -102,12 +102,12 @@ const ServiceProviderScreen = () => {
                 </View>
             </BottomPanel>
 
-            {step === 1 && <CarBrandsDialog setBrand={setBrand} setStep={setStep} setVehicle={setVehicle} vehicle={vehicle}/>}
-            {step === 2 && <CardModelDialog setModelNumber={setModelNumber} brand={brand} setStep={setStep}/>}
-            {step === 3 && <ColorDialog setColor={setColor} setStep={setStep} brand={brand} modelNumber={modelNumber}/>}
-            {/*<PlateNumberDialog brand={brand} modelNumber={modelNumber} setStep = {setStep} open = { step === 4 } />*/}
-            {/*<TimingDialog setBrand = {setPlateNumber} setStep = {setStep} open = { step === 5 } />*/}
-            {/*<CheckoutDialog setStep = {setStep} open = { step === 6 } />*/}
+            {step === 1 && <CarBrandsDialog setBrand={setBrand} setStep={setStep} setVehicle={setVehicle} vehicle={vehicle}/> }
+            {step === 2 && <CardModelDialog setModelNumber={setModelNumber} brand={brand} setStep={setStep}/> }
+            {step === 3 && <ColorDialog setColor={setColor} setStep={setStep} brand={brand} modelNumber={modelNumber}/> }
+            {step === 4 && <PlateNumberDialog brand={brand} modelNumber={modelNumber} setStep = {setStep}/> }
+            <TimingDialog setBrand = {setPlateNumber} setStep = {setStep} open = { step === 5 } />
+            <CheckoutDialog setStep = {setStep} open = { step === 6 } />
 
         </DashboardLayout>
     )

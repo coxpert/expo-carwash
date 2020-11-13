@@ -18,30 +18,20 @@ import {GradientButton} from "../GradientButton";
 export const PlateNumberDialog = (props) => {
 
     const dialogRef = useRef(null);
-    const inputRef = useRef(null);
+    const inputTextRef = useRef(null);
 
     const {
-        open,
         setStep,
         brand,
         modelNumber
     } = props;
 
     useEffect(()=>{
-        if(open){
-            dialogRef.current.open();
-        }else {
-            dialogRef.current.close()
-        }
-    },[open])
-
-    useEffect(()=>{
-        if(inputRef){
-            InteractionManager.runAfterInteractions(() => {
-                // inputRef.current.focus()
-            });
-        }
-    }, [])
+        dialogRef.current.open();
+        InteractionManager.runAfterInteractions(() => {
+            inputTextRef.current.focus()
+        });
+    },[])
 
 
     const _carSubmit = () => {
@@ -87,18 +77,19 @@ export const PlateNumberDialog = (props) => {
                     </View>
                     <View style={{width: '30%'}}>
                         <TextInput
-                            ref = {inputRef}
+                            ref = {inputTextRef}
                             style={{...styles.textInput, marginHorizontal: 10,}}
                         />
                     </View>
                     <View style={{width: '35%'}}>
                         <TextInput
+                            keyboardType ="numeric"
                             style={styles.textInput}
                             placeholder="NUMBER"
                         />
                     </View>
                 </Paper>
-                <GradientButton onPress={_carSubmit()} title="Add my car" height={50} style={{width:'80%', height: 60, marginTop: 10 }} />
+                <GradientButton onPress={_carSubmit} title="Add my car" height={50} style={{width:'80%', height: 60, marginTop: 10 }} />
             </RBSheet>
         </>
     )

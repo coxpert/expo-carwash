@@ -48,7 +48,7 @@ export const ColorDialog = (props) => {
             >
                 <View style={styles.menuTop}>
                     <View style={{flex: 1}}>
-                        <TouchableOpacity onPress={() => setStep(1)}>
+                        <TouchableOpacity onPress={() => setStep(2)}>
                             <Image source={iconArrowLeft} />
                         </TouchableOpacity>
                     </View>
