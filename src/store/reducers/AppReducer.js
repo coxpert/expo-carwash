@@ -25,8 +25,35 @@ const carBrands = [
     'Car brand 14',
 ];
 
+const carModelNumbers = [
+    '301',
+    '302',
+    '303',
+    '304',
+    '305',
+    '306',
+    '307',
+    '308',
+    '309',
+    '3010',
+    '3011',
+    '3012',
+    '3013',
+    '3014',
+    '3015',
+    '3016',
+    '3017',
+    '3018',
+    '3019',
+    '3020',
+    '3021',
+    '3022',
+    '3023',
+];
+
 const INITIAL_STATE = {
     carBrands:carBrands,
+    carModelNumbers: carModelNumbers,
     navigation: null
 };
 

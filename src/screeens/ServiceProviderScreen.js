@@ -103,7 +103,7 @@ const ServiceProviderScreen = () => {
             </BottomPanel>
 
             <CarBrandsDialog setBrand = {setBrand} setStep = {setStep} setVehicle={setVehicle} vehicle={vehicle} open = { step === 1 } />
-            <CardModelDialog setBrand = {setModelNumber} setStep = {setStep} open = { step === 2 } />
+            <CardModelDialog setModelNumber = {setModelNumber} brand = {brand} setStep = {setStep} open = { step === 2 } />
             <ColorDialog setBrand = {setColor} setStep = {setStep} open = { step === 3 } />
             <PlateNumberDialog setBrand = {setPlateNumber} setStep = {setStep} open = { step === 4 } />
             <TimingDialog setBrand = {setPlateNumber} setStep = {setStep} open = { step === 5 } />

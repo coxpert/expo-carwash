@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react'
+import React, {useRef, useEffect, useState} from 'react'
 import {
     View,
     StyleSheet,
@@ -16,7 +16,6 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import {LoadingIcon} from "../LoadingIcon";
 import {GradientBorderView} from "../GradientBorderView";
 import {useSelector} from "react-redux";
-import {setBatch} from "react-redux/lib/utils/batch";
 
 export const CarBrandsDialog = (props) => {
 
@@ -30,6 +29,7 @@ export const CarBrandsDialog = (props) => {
 
     const dialogRef = useRef(null);
     const carBrands = useSelector(state=>state.app.carBrands || []);
+    const [searchText, setSearchText] = useState('');
 
     useEffect(()=>{
         if(open){
@@ -100,21 +100,23 @@ export const CarBrandsDialog = (props) => {
                         )
                     }
                 </View>
-                    <Paper style={styles.searchBox}>
-                        <Image source={iconSearch}/>
-                        <TextInput
-                            placeholder="Search for your vehicle"
-                            style={styles.searchTextInput}
-                        />
-                    </Paper>
+                <Paper style={styles.searchBox}>
+                    <Image source={iconSearch}/>
+                    <TextInput
+                        placeholder="Search for your vehicle"
+                        style={styles.searchTextInput}
+                        onChangeText = {text=>setSearchText(text)}
+                        value={searchText}
+                    />
+                </Paper>
                 <View style={styles.serviceProvideList}>
                     <FlatList
-                        data={carBrands}
+                        data={carBrands.filter(item=>searchText === ''?true:item.toLowerCase().includes(searchText.toLowerCase()))}
                         renderItem = {_brandItem}
                         keyExtractor={item => item}
                         ListEmptyComponent={()=>(
                             <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
-                                <LoadingIcon/>
+                                <Text style={{color:'#808080', paddingTop: 50}}>There is no brand you are looking for</Text>
                             </View>
                         )}
                     />

@@ -9,7 +9,6 @@ import {
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Paper} from "../Paper";
-import {iconArrowNext} from "../../constants";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 export const ColorDialog = (props) => {
@@ -28,16 +27,6 @@ export const ColorDialog = (props) => {
         }
     },[open])
 
-    const BrandItem = ({item}) => {
-        return (
-            <Paper onPress={()=>{}} style={{flexDirection: 'row', alignItems:'center', justifyContent:'space-between', paddingVertical: 15,}}>
-                <View style={{alignItems:'center', flexDirection: 'row'}}>
-                    <Text>{item}</Text>
-                </View>
-                <Image source={iconArrowNext}/>
-            </Paper>
-        )
-    }
 
     return(
         <>

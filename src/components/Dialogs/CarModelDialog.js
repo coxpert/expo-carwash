@@ -1,22 +1,30 @@
-import React, {useRef, useEffect} from 'react'
+import React, {useRef, useEffect, useState} from 'react'
 import {
     View,
     StyleSheet,
     Image,
     TouchableOpacity,
-    Text
+    Text,
+    TextInput,
+    FlatList
 } from "react-native";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {Paper} from "../Paper";
-import {iconArrowLeft} from "../../constants";
+import {colorBorder, colorText, iconArrowLeft, iconArrowNext, iconSearch} from "../../constants";
 import RBSheet from "react-native-raw-bottom-sheet";
+import {GradientBorderView} from "../GradientBorderView";
+import {useSelector} from "react-redux";
 
 export const CardModelDialog = (props) => {
 
     const dialogRef = useRef(null);
+    const [searchText, setSearchText] = useState('');
+    const carModelNumbers = useSelector(state=>state.app.carModelNumbers || [])
     const {
         open,
         setStep,
+        brand,
+        setModelNumber
     } = props;
 
     useEffect(()=>{
@@ -27,14 +35,17 @@ export const CardModelDialog = (props) => {
         }
     },[open])
 
-    const BrandItem = ({item}) => {
+    const _modelNumberItem = ({item}) => {
         return (
-            <Paper onPress={()=>{}} style={{flexDirection: 'row', alignItems:'center', justifyContent:'space-between', paddingVertical: 15,}}>
+            <TouchableOpacity onPress={()=>{
+                setModelNumber(item)
+                setStep(3)
+            }} style={styles.brandItem}>
                 <View style={{alignItems:'center', flexDirection: 'row'}}>
-                    <Text>{item}</Text>
+                    <Text style={{color: colorText}}>{item}</Text>
                 </View>
                 <Image source={iconArrowNext}/>
-            </Paper>
+            </TouchableOpacity>
         )
     }
 
@@ -54,10 +65,42 @@ export const CardModelDialog = (props) => {
                 }}
             >
                 <View style={styles.menuTop}>
-                    <TouchableOpacity onPress={() => setStep(1)}>
-                        <Image source={iconArrowLeft} />
-                    </TouchableOpacity>
+                    <View style={{flex: 1}}>
+                        <TouchableOpacity onPress={() => setStep(1)}>
+                            <Image source={iconArrowLeft} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{flex: 1}}>
+                        <GradientBorderView containerStyle={{width: 'auto', height:35}} style={{justifyContent: 'center', paddingHorizontal: 20, alignItems:'center'}}>
+                            <Text>{brand}</Text>
+                        </GradientBorderView>
+                    </View>
+                    <View style={{flex: 1}}><Text> </Text></View>
                 </View>
+
+                <Paper style={styles.searchBox}>
+                    <Image source={iconSearch}/>
+                    <TextInput
+                        placeholder="Search for your vehicle"
+                        style={styles.searchTextInput}
+                        onChangeText = {text=>setSearchText(text)}
+                        value={searchText}
+                    />
+                </Paper>
+
+                <View style={styles.serviceProvideList}>
+                    <FlatList
+                        data={carModelNumbers.filter(item=>searchText === ''?true:item.toLowerCase().includes(searchText.toLowerCase()))}
+                        renderItem = {_modelNumberItem}
+                        keyExtractor={item => item}
+                        ListEmptyComponent={()=>(
+                            <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
+                                <Text style={{color:'#808080', paddingTop: 50}}>There is no brand you are looking for</Text>
+                            </View>
+                        )}
+                    />
+                </View>
+
             </RBSheet>
         </>
     )
@@ -77,5 +120,22 @@ const styles = StyleSheet.create({
         padding: 20,
         alignItems:'center',
         flexDirection:'row',
-    }
+    },
+    searchBox:{
+        marginTop: 15,
+    },
+    searchTextInput:{
+        flex: 1,
+        paddingHorizontal: 10,
+    },
+    brandItem:{
+        width:'100%',
+        flexDirection: 'row',
+        alignItems:'center',
+        justifyContent:'space-between',
+        paddingVertical: 15,
+        paddingHorizontal:'10%',
+        borderBottomColor:colorBorder,
+        borderBottomWidth: 0.2,
+    },
 })
