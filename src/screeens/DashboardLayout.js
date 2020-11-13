@@ -134,7 +134,6 @@ const styles = StyleSheet.create({
     menuTop:{
         width:'100%',
         flexDirection:'row',
-        backgroundColor:'red',
         justifyContent:'space-between',
         margin: wp('5%'),
         paddingHorizontal: wp('5%')
