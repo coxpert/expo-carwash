@@ -2,7 +2,7 @@ import React from 'react'
 
 import {LinearGradient} from "expo-linear-gradient";
 import {colorGradientEnd, colorGradientStart} from "../constants";
-import {View} from "react-native";
+import {View, TouchableOpacity} from "react-native";
 
 export const GradientBorderView = (props) => {
 
@@ -14,9 +14,39 @@ export const GradientBorderView = (props) => {
         children,
         style,
         containerStyle,
-        fill
+        fill,
+        onPress,
     } = props
 
+    if(onPress){
+        return (
+            <TouchableOpacity onPress={onPress}>
+                <LinearGradient
+                    colors={[colorGradientStart, colorGradientEnd]}
+                    start = {start}
+                    end = {end}
+                    style={{
+                        width:'100%',
+                        borderRadius: borderRadius,
+                        padding: borderWidth,
+                        justifyContent:'center',
+                        alignItems:'center',
+                        ...containerStyle,
+                    }}
+                >
+                    <View style={{
+                        backgroundColor:fill?'transparent':'white',
+                        borderRadius:borderRadius - borderWidth,
+                        width:'100%',
+                        height:'100%',
+                        ...style
+                    }}>
+                        {children}
+                    </View>
+                </LinearGradient>
+            </TouchableOpacity>
+        )
+    }
     return (
         <LinearGradient
             colors={[colorGradientStart, colorGradientEnd]}
@@ -26,7 +56,10 @@ export const GradientBorderView = (props) => {
                 width:'100%',
                 borderRadius: borderRadius,
                 padding: borderWidth,
-                ...containerStyle
+                justifyContent:'center',
+                alignItems:'center',
+                ...containerStyle,
+                ...(fill?style:{})
             }}
         >
             {

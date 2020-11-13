@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import DashboardLayout from "./DashboardLayout";
 import {Paper} from "../components";
 import {Text, Image, StyleSheet, FlatList, TouchableOpacity, View} from "react-native";
@@ -7,6 +7,9 @@ import {iconAdd, iconMark, iconOval} from "../constants";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {mainColor} from "../constants";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {useFirestoreConnect} from "react-redux-firebase";
+import {useDispatch} from "react-redux";
+import {appSetNavigation} from "../store/actions";
 
 const data = [
     {
@@ -22,6 +25,17 @@ const data = [
 ]
 
 const HomeScreen = ({navigation}) => {
+
+    useFirestoreConnect([{
+        collection:'service_provider',
+        storeAs:'serviceProviders',
+    }])
+
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(appSetNavigation(navigation))
+    },[])
 
 
     const _serviceItemPress = () => {

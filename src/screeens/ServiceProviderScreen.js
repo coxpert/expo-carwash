@@ -1,86 +1,133 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import DashboardLayout from "./DashboardLayout";
-import {GradientBorderView, GradientButton, Paper} from "../components";
-import {Text, Image, StyleSheet, FlatList, TouchableOpacity, View} from "react-native";
+import {
+    CardModelDialog,
+    ColorDialog,
+    GradientBorderView,
+    GradientPanel,
+    LoadingIcon,
+    Paper,
+    PlateNumberDialog, TimingDialog
+} from "../components";
+import {Text, Image, StyleSheet, FlatList, View} from "react-native";
 import {BottomPanel} from "../components/BottmPanel";
-import {iconAdd, iconMark, iconOval} from "../constants";
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {mainColor} from "../constants";
+import {iconCar, iconOval, imgDate} from "../constants";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-const data = [
-    {
-        id: 1,
-        title: "Car wash service",
-        description:'Super exterior car wash with',
-    },
-    {
-        id: 2,
-        title: "Car wash service with interior",
-        description:'Super exterior car wash with',
-    }
-]
+//Dialogs
+import {CarBrandsDialog} from "../components";
+import {useSelector} from "react-redux";
+
+
+const serviceList = ['Car wash service', 'Oil change', 'Car maintenance']
 
 const ServiceProviderScreen = () => {
 
+    const [step, setStep] = useState(0);
+    const [serviceProvider, setServiceProvider] = useState('');
+    const [serviceCategory, setServiceCategory] = useState(serviceList[0]);
+    const [vehicle, setVehicle] = useState('car');
+    const [brand, setBrand] = useState('');
+    const [modelNumber, setModelNumber] = useState('');
+    const [color, setColor] = useState('');
+    const [plateNumber, setPlateNumber] = useState('');
 
-    const _serviceItemPress = () => {
+    const serviceProviders = useSelector(state=>state.firestore.ordered.serviceProviders || []);
 
+    const _serviceItemPress = (item) => {
+        setServiceProvider(item);
+        setStep(1);
     }
 
     const _renderItem = ({item}) => (
-        <TouchableOpacity onPress={_serviceItemPress} style={styles.serviceItem}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image source={iconOval} style={styles.serviceItemImage}/>
-                <View style={styles.serviceItemText}>
-                    <Text style={styles.textTitle}>{item.title}</Text>
-                    <Text style={styles.textDescription}>{item.description}</Text>
+        <Paper onPress={()=>{_serviceItemPress(item)}} style={styles.serviceItem}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', width:'100%'}}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Image source={iconOval} style={styles.serviceItemImage}/>
+                    <View style={styles.serviceItemText}>
+                        <Text style={styles.textTitle}>{item.name}</Text>
+                        <View style={{flexDirection: 'row', marginTop: 4,}}>
+                            <Image source={iconCar}  style={{marginRight: 5, width: 22, resizeMode: 'cover'}}/>
+                            <Text style={{marginRight: 5, fontSize: 14, color:'#555555',}}>45</Text>
+                            <Text style={{ fontSize: 14, color:'#555555'}}>AEG</Text>
+                        </View>
+                    </View>
                 </View>
+                <Text style={styles.reviewScore}>4.8</Text>
             </View>
-            <MaterialIcons name="keyboard-arrow-right" size={32} color={mainColor} style={styles.arrowIcon} />
-        </TouchableOpacity>
+            <View style={{flexDirection:'row', justifyContent:'space-between', width:'100%', alignItems: 'center', marginTop: 13,}}>
+                <GradientPanel
+                    borderRadius={3}
+                    colors={['#21FF9933', '#008CFF33']}
+                    style={{width:'85%', height: 34, justifyContent: 'center', alignItems:'center'}}
+                >
+                    <Text>2020/11/09</Text>
+                </GradientPanel>
+                <Image source={imgDate} style={{height: 34, resizeMode: 'contain'}}/>
+            </View>
+        </Paper>
     )
 
     return (
         <DashboardLayout>
-            <BottomPanel style={styles.panelBody}>
-                <View style={{width:'100%', height: 32}}>
+            <BottomPanel style={styles.panelBody}  hidden = { step > 0 }>
+                <View style={styles.serviceCategoryList}>
                     <FlatList
                         horizontal={true}
                         data={['Car wash service', 'Oil change', 'Car maintenance']}
                         renderItem = {({item})=>(
-                            <GradientBorderView fill containerStyle={{width:'auto', marginLeft: 10}} style={{paddingVertical: 4, paddingHorizontal: 15}}>
-                                <Text>{item}</Text>
+                            <GradientBorderView
+                                fill = {serviceCategory === item}
+                                containerStyle={{width:'auto', marginLeft: 10}}
+                                style={{paddingVertical: 4, paddingHorizontal: 15}}
+                                onPress={()=>{setServiceCategory(item)}}
+                            >
+                                <Text style = {{color: serviceCategory === item ?'white':'#555555'}}>{item}</Text>
                             </GradientBorderView>
                         )}
                         keyExtractor={item => item}
                     />
                 </View>
-
-                <FlatList
-                    data={data}
-                    renderItem = {_renderItem}
-                    keyExtractor={item => item.id}
-                />
+                <View style={styles.serviceProvideList}>
+                    <FlatList
+                        data={serviceProviders}
+                        renderItem = {_renderItem}
+                        keyExtractor={item => item.id}
+                        ListEmptyComponent={()=>(
+                            <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
+                                <LoadingIcon/>
+                            </View>
+                        )}
+                    />
+                </View>
             </BottomPanel>
+
+            <CarBrandsDialog setBrand = {setBrand} setStep = {setStep} setVehicle={setVehicle} vehicle={vehicle} open = { step === 1 } />
+            <CardModelDialog setBrand = {setModelNumber} setStep = {setStep} open = { step === 2 } />
+            <ColorDialog setBrand = {setColor} setStep = {setStep} open = { step === 3 } />
+            <PlateNumberDialog setBrand = {setPlateNumber} setStep = {setStep} open = { step === 4 } />
+            <TimingDialog setBrand = {setPlateNumber} setStep = {setStep} open = { step === 5 } />
+
         </DashboardLayout>
     )
 }
 
 const styles = StyleSheet.create({
     panelBody:{
-        paddingHorizontal: 20, paddingTop: 30,
         height: hp('100%') - 90,
+    },
+    serviceCategoryList:{
+        width:'100%',
+        height: 62,
+        marginBottom: 20,
+        paddingTop: 30,
+        paddingHorizontal:'5%',
     },
     serviceItem:{
         width: wp('100%')-40,
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent: 'space-between',
-        paddingBottom: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: '#dfdfdf',
-        paddingTop: 15,
+        flexDirection:'column',
+        paddingBottom: 20,
+        paddingTop: 20,
     },
     serviceItemImage:{
         width: 45,
@@ -91,11 +138,21 @@ const styles = StyleSheet.create({
     serviceItemText:{
     },
     textTitle:{
-        fontSize: 18,
+        fontSize: 16,
+        color:'#555555',
+        fontWeight:'100',
     },
     textDescription:{
         fontSize: 14,
         color: '#afafaf'
+    },serviceProvideList:{
+        flex: 1,
+        width:'100%',
+        paddingBottom: 50,
+    },
+    reviewScore:{
+        fontSize: 16,
+        color: '#10EE10',
     }
 })
 

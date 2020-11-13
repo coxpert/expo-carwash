@@ -10,12 +10,13 @@ export const GradientPanel = (props) => {
         borderWidth,
         borderRadius,
         children,
-        style
+        style,
+        colors
     } = props
 
     return (
         <LinearGradient
-            colors={[colorGradientStart, colorGradientEnd]}
+            colors={colors}
             start = {start}
             end = {end}
             style={{
@@ -31,6 +32,7 @@ export const GradientPanel = (props) => {
 }
 
 GradientPanel.defaultProps = {
+    colors:[colorGradientStart, colorGradientEnd],
     start:[0, 1],
     end:[1, 0],
     style:{},

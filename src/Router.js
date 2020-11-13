@@ -19,8 +19,6 @@ export  const AppNavigator = () =>{
 
     const {profile} = useSelector(state=>state.firebase);
 
-    console.log(profile)
-
     return (
         <NavigationContainer>
             <Stack.Navigator

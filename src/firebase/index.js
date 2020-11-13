@@ -9,14 +9,14 @@ import * as firebase from 'firebase';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAcZi3LGVrC4odB1ZbD0UgL8FYklMgcfHY",
-    authDomain: "cloudpin-pin-669.firebaseapp.com",
-    databaseURL: "https://cloudpin-pin-669.firebaseio.com",
-    projectId: "cloudpin-pin-669",
-    storageBucket: "cloudpin-pin-669.appspot.com",
-    messagingSenderId: "63023708585",
-    appId: "1:63023708585:web:c4c954b128e948a5e46cb8",
-    measurementId: "G-QNYSYQ50G9"
+    apiKey: "AIzaSyDUdqgdQ_IG9wIYRJuk9OmD2V2RFi4CjTg",
+    authDomain: "carwash-b4e21.firebaseapp.com",
+    databaseURL: "https://carwash-b4e21.firebaseio.com",
+    projectId: "carwash-b4e21",
+    storageBucket: "carwash-b4e21.appspot.com",
+    messagingSenderId: "299229397898",
+    appId: "1:299229397898:web:c2cd29ca64a21c6dc37e73",
+    measurementId: "G-9N1W8V2XH0"
 };
 
 

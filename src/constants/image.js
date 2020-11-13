@@ -6,6 +6,7 @@ export const imgMenu1 = require('../assets/images/menu-1.png')
 export const imgMenu2 = require('../assets/images/menu-2.png')
 export const imgMenu3 = require('../assets/images/menu-3.png')
 export const imgLogoText = require('../assets/images/logo-text.png')
+export const imgDate = require('../assets/images/date-icon.png')
 
 //icons
 
@@ -21,3 +22,5 @@ export const iconOval = require('../assets/images/oval.png')
 export const iconMark = require('../assets/images/mark.png')
 export const iconAdd = require('../assets/images/add.png')
 export const iconSub = require('../assets/images/sub.png')
+export const iconScooter = require('../assets/images/scooter.png')
+export const iconSearch = require('../assets/images/search.png')
