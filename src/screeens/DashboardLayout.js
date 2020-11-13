@@ -10,7 +10,7 @@ import MapView from 'react-native-maps';
 import {
     iconChart,
     iconDate,
-    iconLeftArrow,
+    iconArrowNext,
     iconManageCard,
     iconMarkFill,
     iconMenuCar,
@@ -22,6 +22,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import RBSheet from "react-native-raw-bottom-sheet";
 import {Paper} from "../components";
+import {useFirestoreConnect} from "react-redux-firebase";
 
 const MenuItem = ({icon, title, onPress}) => {
     return (
@@ -30,14 +31,21 @@ const MenuItem = ({icon, title, onPress}) => {
                 <Image source={icon} style={{marginRight: 10,}}/>
                 <Text>{title}</Text>
             </View>
-            <Image source={iconLeftArrow}/>
+            <Image source={iconArrowNext}/>
         </Paper>
     )
 }
 
 const DashboardLayout = (props) => {
 
+    useFirestoreConnect([{
+        collection:'service_provider',
+        storeAs:'serviceProviders',
+    }])
+
+
     const menuRef = useRef(null);
+
     const {
         children
     } = props;

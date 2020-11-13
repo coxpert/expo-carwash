@@ -7,9 +7,8 @@ import {
     Text
 } from "react-native";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Paper} from "../Paper";
-import {iconLeftArrow} from "../../constants";
+import {iconArrowLeft} from "../../constants";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 export const CardModelDialog = (props) => {
@@ -34,7 +33,7 @@ export const CardModelDialog = (props) => {
                 <View style={{alignItems:'center', flexDirection: 'row'}}>
                     <Text>{item}</Text>
                 </View>
-                <Image source={iconLeftArrow}/>
+                <Image source={iconArrowNext}/>
             </Paper>
         )
     }
@@ -55,8 +54,8 @@ export const CardModelDialog = (props) => {
                 }}
             >
                 <View style={styles.menuTop}>
-                    <TouchableOpacity onPress={() => setStep(0)}>
-                        <MaterialIcons name="arrow-left" size={20} color="#555555"/>
+                    <TouchableOpacity onPress={() => setStep(1)}>
+                        <Image source={iconArrowLeft} />
                     </TouchableOpacity>
                 </View>
             </RBSheet>

@@ -9,7 +9,7 @@ import {
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Paper} from "../Paper";
-import {iconLeftArrow} from "../../constants";
+import {iconArrowNext} from "../../constants";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 export const PlateNumberDialog = (props) => {
@@ -34,7 +34,7 @@ export const PlateNumberDialog = (props) => {
                 <View style={{alignItems:'center', flexDirection: 'row'}}>
                     <Text>{item}</Text>
                 </View>
-                <Image source={iconLeftArrow}/>
+                <Image source={iconArrowNext}/>
             </Paper>
         )
     }

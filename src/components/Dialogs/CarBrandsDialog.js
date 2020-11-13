@@ -11,7 +11,7 @@ import {
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Paper} from "../Paper";
-import {colorBorder, colorText, iconCar, iconLeftArrow, iconScooter, iconSearch} from "../../constants";
+import {colorBorder, colorText, iconCar, iconArrowNext, iconScooter, iconSearch} from "../../constants";
 import RBSheet from "react-native-raw-bottom-sheet";
 import {LoadingIcon} from "../LoadingIcon";
 import {GradientBorderView} from "../GradientBorderView";
@@ -48,7 +48,7 @@ export const CarBrandsDialog = (props) => {
                 <View style={{alignItems:'center', flexDirection: 'row'}}>
                     <Text style={{color: colorText}}>{item}</Text>
                 </View>
-                <Image source={iconLeftArrow}/>
+                <Image source={iconArrowNext}/>
             </TouchableOpacity>
         )
     }
