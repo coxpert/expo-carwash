@@ -44,6 +44,7 @@ export const CheckoutDialog = (props) => {
                 }}
             >
                 <View style={styles.menuTop}>
+                    <Text style={{color:'#555555', fontSize: 20}}>Checkout</Text>
                     <TouchableOpacity onPress={() => setStep(0)}>
                         <MaterialIcons name="close" size={20} color="#555555"/>
                     </TouchableOpacity>
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     menuTop:{
         width: '100%',
         padding: 20,
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         alignItems:'center',
         flexDirection:'row',
     }

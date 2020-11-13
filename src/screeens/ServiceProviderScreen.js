@@ -36,7 +36,7 @@ const ServiceProviderScreen = () => {
 
     const _serviceItemPress = (item) => {
         setServiceProvider(item);
-        setStep(1);
+        setStep(5);
     }
 
     const _renderItem = ({item}) => (
@@ -106,8 +106,8 @@ const ServiceProviderScreen = () => {
             {step === 2 && <CardModelDialog setModelNumber={setModelNumber} brand={brand} setStep={setStep}/> }
             {step === 3 && <ColorDialog setColor={setColor} setStep={setStep} brand={brand} modelNumber={modelNumber}/> }
             {step === 4 && <PlateNumberDialog brand={brand} modelNumber={modelNumber} setStep = {setStep}/> }
-            <TimingDialog setBrand = {setPlateNumber} setStep = {setStep} open = { step === 5 } />
-            <CheckoutDialog setStep = {setStep} open = { step === 6 } />
+            {step === 5 && <TimingDialog setStep = {setStep} /> }
+            {step === 6 && <CheckoutDialog setStep = {setStep} /> }
 
         </DashboardLayout>
     )
