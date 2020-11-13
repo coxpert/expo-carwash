@@ -12,7 +12,7 @@ import {Paper} from "../Paper";
 import {iconArrowNext} from "../../constants";
 import RBSheet from "react-native-raw-bottom-sheet";
 
-export const TimingDialog = (props) => {
+export const CheckoutDialog = (props) => {
 
     const dialogRef = useRef(null);
     const {

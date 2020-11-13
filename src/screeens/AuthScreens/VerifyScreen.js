@@ -1,9 +1,8 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {
     View,
     Text,
     StyleSheet,
-    TextInput,
     Animated,
     TouchableOpacity,
     Platform,
@@ -45,7 +44,7 @@ const VerifyScreen = ({navigation}) =>{
                     </TouchableOpacity>
                     <Text style={styles.topText}>Enter mobile number</Text>
                 </View>
-                <GradientBorderView style={{padding: 10, flexDirection: 'row', justifyContent: 'center'}}>
+                <GradientBorderView style={{padding: 10, flexDirection: 'row', justifyContent: 'center', height: 50,}}>
                     <CodeField
                         ref={ref}
                         {...props}
@@ -56,12 +55,12 @@ const VerifyScreen = ({navigation}) =>{
                         keyboardType="number-pad"
                         textContentType="oneTimeCode"
                         renderCell={({index, symbol, isFocused}) => (
-                            <Text
+                            <View
                                 key={index}
                                 style={[styles.cell, isFocused && styles.focusCell]}
                                 onLayout={getCellOnLayoutHandler(index)}>
-                                {symbol || (isFocused ? <Cursor /> : null)}
-                            </Text>
+                                <Text>{symbol || (isFocused ? <Cursor /> : null)}</Text>
+                            </View>
                         )}
                     />
                 </GradientBorderView>
@@ -92,14 +91,6 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent: 'space-around',
     },
-    textInputItem:{
-      width: 14,
-      height: 25,
-      borderBottomWidth: 1,
-        marginLeft: 6,
-        fontSize: 20,
-        textAlign:'center'
-    },
     continueButton:{
         marginTop: 60,
     },
@@ -108,13 +99,14 @@ const styles = StyleSheet.create({
     codeFieldRoot: {padding: 3},
     cell: {
         width: 20,
-        height: 25,
+        height: 20,
         fontSize: 18,
         borderBottomWidth: 1,
         borderColor: '#555555',
+        borderStyle:'solid',
         marginRight: 5,
         textAlign: 'center',
-        color:'#555555'
+        color:'#555555',
     },
     focusCell: {
         borderColor: '#000',

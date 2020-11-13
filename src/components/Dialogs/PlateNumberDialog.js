@@ -1,22 +1,25 @@
-import React, {useRef, useEffect, useState} from 'react'
+import React, {useRef, useEffect} from 'react'
 import {
     View,
     StyleSheet,
     Image,
     TouchableOpacity,
     Text,
-    TextInput, InteractionManager
+    TextInput,
+    InteractionManager
 } from "react-native";
 import {Paper} from "../Paper";
 import {colorBorder, colorText, iconArrowLeft, iconCar} from "../../constants";
 import RBSheet from "react-native-raw-bottom-sheet";
 import {GradientBorderView} from "../GradientBorderView";
 import Feather from 'react-native-vector-icons/Feather';
+import {GradientButton} from "../GradientButton";
 
 export const PlateNumberDialog = (props) => {
 
     const dialogRef = useRef(null);
     const inputRef = useRef(null);
+
     const {
         open,
         setStep,
@@ -40,6 +43,10 @@ export const PlateNumberDialog = (props) => {
         }
     }, [])
 
+
+    const _carSubmit = () => {
+        setStep(5)
+    }
 
     return(
         <>
@@ -91,6 +98,7 @@ export const PlateNumberDialog = (props) => {
                         />
                     </View>
                 </Paper>
+                <GradientButton onPress={_carSubmit()} title="Add my car" height={50} style={{width:'80%', height: 60, marginTop: 10 }} />
             </RBSheet>
         </>
     )
@@ -120,8 +128,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     textInput:{
-      borderBottomWidth: 1,
-      borderBottomColor: colorBorder,
+        borderBottomWidth: 1,
+        borderBottomColor: colorBorder,
         paddingLeft: 10,
     },
 })

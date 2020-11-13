@@ -76,6 +76,7 @@ export const ColorDialog = (props) => {
                 </View>
 
                 <ColorPickerDialog open = {openColorPicker} pickColor={setColor} setStep = {setStep} setOpen = {setOpenColorPicker} />
+
             </RBSheet>
         </>
     )

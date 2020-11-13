@@ -34,7 +34,7 @@ const CreatePasswordScreen = ({navigation}) =>{
                 <View style={{flexDirection:'row'}}>
                     <Text style={styles.topText}>Create password</Text>
                 </View>
-                <GradientBorderView style={{padding: 10, flexDirection: 'row', justifyContent: 'center'}}>
+                <GradientBorderView style={{padding: 10, flexDirection: 'row', justifyContent: 'center', height: 50}}>
                     <TextInput
                         secureTextEntry={true}
                         style={styles.passwordInput}

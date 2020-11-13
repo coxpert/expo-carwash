@@ -14,7 +14,8 @@ export const GradientButton = (props) => {
         style,
         disabled,
         onPress,
-        loading
+        loading,
+        height,
     } = props
 
     return (
@@ -30,7 +31,7 @@ export const GradientButton = (props) => {
                     backgroundColor:'white',
                     justifyContent:'center',
                     alignItems:'center',
-                    height: 60,
+                    height: height,
                 }}
             >
                 {
@@ -49,5 +50,6 @@ GradientButton.defaultProps = {
     start:[0, 1],
     end:[1, 0],
     style:{},
+    height: 60,
     disabled: false,
 }

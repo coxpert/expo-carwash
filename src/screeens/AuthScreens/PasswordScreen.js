@@ -69,7 +69,7 @@ const PasswordScreen = () =>{
 
             <Animated.View style={{height: formContainerHeight,...styles.formContainer}}>
                 { showButton  && <Text style={styles.topText}>Enter mobile number</Text>}
-                <GradientPanel style = { styles.phoneNumberGroup} >
+                <GradientPanel style = {styles.phoneNumberGroup} >
                     <View style={styles.countryCode} >
                         <Feather name="chevron-down" size={22} color="#555555"/>
                         <Text style={styles.countryCodeText}>+971</Text>
@@ -77,7 +77,7 @@ const PasswordScreen = () =>{
                     <TextInput
                         style={styles.phoneNumber}
                         keyboardType ="numeric"
-                        placeholder = "Phone Number"
+                        placeholder = "Password"
                         value={phoneNumber}
                         onChangeText={_handleChange}
                         onFocus={_animateFormContainer}

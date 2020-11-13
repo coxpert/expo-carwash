@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import DashboardLayout from "./DashboardLayout";
 import {
-    CardModelDialog,
+    CardModelDialog, CheckoutDialog,
     ColorDialog,
     GradientBorderView,
     GradientPanel,
@@ -107,6 +107,7 @@ const ServiceProviderScreen = () => {
             <ColorDialog setColor = {setColor} setStep = {setStep} brand={brand} modelNumber={modelNumber} open = { step === 3 } />
             <PlateNumberDialog brand={brand} modelNumber={modelNumber} setStep = {setStep} open = { step === 4 } />
             <TimingDialog setBrand = {setPlateNumber} setStep = {setStep} open = { step === 5 } />
+            <CheckoutDialog setStep = {setStep} open = { step === 6 } />
 
         </DashboardLayout>
     )
