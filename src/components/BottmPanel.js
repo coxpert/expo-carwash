@@ -8,12 +8,12 @@ export const BottomPanel = (props) => {
         hidden
     } = props;
 
+    if(hidden) return  null;
+
     return (
-        <>
-            <View style={{...styles.root, ...style, display: hidden?'none':'block'}}>
-                {children}
-            </View>
-        </>
+        <View style={{...styles.root, ...style}}>
+            {children}
+        </View>
     )
 }
 

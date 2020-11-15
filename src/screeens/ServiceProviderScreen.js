@@ -23,8 +23,8 @@ const serviceList = ['Car wash service', 'Oil change', 'Car maintenance']
 
 const ServiceProviderScreen = () => {
 
-    const [step, setStep] = useState(0);
-    const [serviceProvider, setServiceProvider] = useState('');
+    const [step, setStep] = useState(5);
+    const [serviceProvider, setServiceProvider] = useState({});
     const [serviceCategory, setServiceCategory] = useState(serviceList[0]);
     const [vehicle, setVehicle] = useState('car');
     const [brand, setBrand] = useState('');
@@ -36,7 +36,7 @@ const ServiceProviderScreen = () => {
 
     const _serviceItemPress = (item) => {
         setServiceProvider(item);
-        setStep(5);
+        setStep(1);
     }
 
     const _renderItem = ({item}) => (
@@ -106,9 +106,8 @@ const ServiceProviderScreen = () => {
             {step === 2 && <CardModelDialog setModelNumber={setModelNumber} brand={brand} setStep={setStep}/> }
             {step === 3 && <ColorDialog setColor={setColor} setStep={setStep} brand={brand} modelNumber={modelNumber}/> }
             {step === 4 && <PlateNumberDialog brand={brand} modelNumber={modelNumber} setStep = {setStep}/> }
-            {step === 5 && <TimingDialog setStep = {setStep} /> }
-            {step === 6 && <CheckoutDialog setStep = {setStep} /> }
-
+            {step === 5 && <TimingDialog setStep = {setStep} brand={brand} modelNumber={modelNumber} serviceProvider={serviceProvider}/> }
+            {step === 6 && <CheckoutDialog  setStep = {setStep}/> }
         </DashboardLayout>
     )
 }
@@ -139,7 +138,7 @@ const styles = StyleSheet.create({
     serviceItemText:{
     },
     textTitle:{
-        fontSize: 16,
+        fontSize: 18,
         color:'#555555',
         fontWeight:'400',
     },

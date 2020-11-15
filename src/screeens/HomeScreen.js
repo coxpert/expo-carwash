@@ -66,8 +66,8 @@ const HomeScreen = ({navigation}) => {
                 <Text style={styles.textStyle}>Add Vehicle</Text>
             </Paper>
 
-            <BottomPanel style={{paddingHorizontal: 20, paddingTop: 30}}>
-                <View style={{height: hp('27%')}}>
+            <BottomPanel style={{paddingHorizontal: 20, paddingTop: 10, justifyContent:'center', alignItems: 'center'}}>
+                <View style={{height: hp('25%')}}>
                     <FlatList
                         data={data}
                         renderItem = {_renderItem}
